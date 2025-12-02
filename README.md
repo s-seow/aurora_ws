@@ -4,7 +4,7 @@ This contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/S
 
 ## Setup ROS2 / Install Dependencies
 
-``rosdep install -i --from-path src --rosdistro humble -y``....000000000000000000000000000000000000000000000....................
+``rosdep install -i --from-path src --rosdistro humble -y``
 
 ``colcon build``
 

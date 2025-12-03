@@ -2,3 +2,5 @@
 /maps/
 /build/
 /install/
+/src/aurora_remote_public/
+/src/slamware_ros_sdk/

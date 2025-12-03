@@ -21,9 +21,10 @@ setup(
     entry_points={
         'console_scripts': [
         'map_set_sync_script = py_srvcli.map_set_sync_script:main', 
-        # 1. call SyncSetStcm service to set map
-        # 2. publish one SyncMapRequest to /sync_map
-        # 3. subscribe to /system_status and /robot_pose
+        # 1. runs an rviz subprocess to connect to aurora
+        # 2. call SyncSetStcm service to set map
+        # 3. publish one SyncMapRequest to /sync_map
+        # 4. subscribe to /system_status and /robot_pose till spin is shutdown
         ],
     },
 )

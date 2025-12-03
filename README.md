@@ -1,14 +1,24 @@
-# SLAMTEC Aurora Script for Buggy Tracking
+# Aurora Script for Buggy Tracking
 
-This contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/Spec) that allows for 1. setting a map and 2. syncing the map for the connected device at   IP ``192.168.11.1``.
+This repository contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/Spec) that allows for 1. setting a map and 2. syncing the map for the connected device at   IP ``192.168.11.1``.
 
-## Setup ROS2 / Install Dependencies
+## Setup ROS2
 
 ``rosdep install -i --from-path src --rosdistro humble -y``
 
 ``colcon build``
 
 ``build  install  log  src``
+
+## Install Dependencies
+
+The script requires ``--slamware_ros_sdk`` and ``--aurora_remote_public`` to run.
+
+``--slamware_ros_sdk`` contains ``slamware_ros_sdk_server_node`` which will connect to the Aurora and perform the functionalities.
+
+``--aurora_remote_public`` contains the Aurora-related libraries.
+
+Documentation found here: https://developer.slamtec.com/docs/slamware/aurora-ros2-sdk-en/
 
 ## To run script
 
@@ -28,19 +38,13 @@ Run script with map_name selected in /maps
 
 ``ros2 run py_srvcli map_set_sync_script maps/(map_name).stcm``
 
-## To run RVIZ
+## Individual misc. commands (after source + export)
 
-``colcon build``
-
-``source install/setup.bash``
-
-``export LD_LIBRARY_PATH=~/aurora_ws/src/aurora_remote_public/lib/linux_x86_64:$LD_LIBRARY_PATH``
+### run RVIZ separately
 
 ``ros2 launch slamware_ros_sdk slamware_ros_sdk_server_and_view.xml ip_address:=192.168.11.1``
 
-## Other commands after source+export
-
-### see system status
+### view system status
 
 ``ros2 topic echo /slamware_ros_sdk_server_node/system_status``
 

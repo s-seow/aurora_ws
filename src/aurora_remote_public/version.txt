@@ -1,7 +1,0 @@
-SLAMTEC Aurora
-Public Remote SDK
-
-1.2.0-rtm
-
-
-visit www.slamte.com for more info

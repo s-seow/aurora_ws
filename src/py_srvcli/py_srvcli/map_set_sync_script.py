@@ -1,11 +1,12 @@
 import sys
+import subprocess
 import rclpy
 from rclpy.node import Node
+import time
 
 from slamware_ros_sdk.srv import SyncSetStcm
 from slamware_ros_sdk.msg import SyncMapRequest, SystemStatus
 from geometry_msgs.msg import PoseStamped as RobotPose
-
 
 class MinimalClientAsync(Node):
 
@@ -37,27 +38,43 @@ class MinimalClientAsync(Node):
     def listener_callback_robot_pose(self, msg):
         self.get_logger().info('Robot Pose: x="%f", y="%f", z="%f"' % (msg.pose.position.x, msg.pose.position.y, msg.pose.position.z))
         self.get_logger().info('Robot Orientation: x="%f", y="%f", z="%f", w="%f"' % (msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w))
+        time.sleep(1)
 
 
 def main():
-    rclpy.init()
-    
-    minimal_client = MinimalClientAsync()
-    
-    future = minimal_client.send_map(str(sys.argv[1]))
-    rclpy.spin_until_future_complete(minimal_client, future)
-    response = future.result()
-    minimal_client.get_logger().info(f"{response}")
-    
-    minimal_client.send_request()
-    minimal_client.get_logger().info("Map Synced")
 
-    rclpy.spin(minimal_client)
-    # Uncomment to keep node alive 
+    slam_proc = subprocess.Popen(
+        [
+        "ros2", "launch", "slamware_ros_sdk", "slamware_ros_sdk_server_and_view.xml", "ip_address:=192.168.11.1",
+        ],
 
-    minimal_client.destroy_node()
-    rclpy.shutdown()
+    # Following 2 lines silences rviz logs    
+    stdout = subprocess.DEVNULL,
+    stderr = subprocess.DEVNULL,
+    )
 
+    try:
+        rclpy.init()
+        
+        minimal_client = MinimalClientAsync()
+        
+        future = minimal_client.send_map(str(sys.argv[1]))
+        rclpy.spin_until_future_complete(minimal_client, future)
+        response = future.result()
+        minimal_client.get_logger().info(f"{response}")
+        
+        minimal_client.send_request()
+        minimal_client.get_logger().info("Map Synced")
+
+        # Uncomment spin to keep node alive 
+        rclpy.spin(minimal_client)
+        
+        minimal_client.destroy_node()
+        rclpy.shutdown()
+
+    finally:
+        slam_proc.terminate()
+        slam_proc.wait()
 
 if __name__ == '__main__':
     main()

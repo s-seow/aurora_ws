@@ -93,16 +93,16 @@ def main():
     launch_log = open(launch_log_path, "w", buffering=1)
 
     launch_cmd = (
-        "source install/setup.bash &&" # needed
+        "source install/setup.bash &&" # needed for run
         "source /opt/ros/humble/setup.bash && "
         "source ~/aurora_ws/install/setup.bash && "
-        "export LD_LIBRARY_PATH=~/aurora_ws/src/aurora_remote_public/lib/linux_x86_64:$LD_LIBRARY_PATH && " # needed
+        "export LD_LIBRARY_PATH=~/aurora_ws/src/aurora_remote_public/lib/linux_x86_64:$LD_LIBRARY_PATH && "
         "ros2 launch slamware_ros_sdk slamware_ros_sdk_server_and_view.xml ip_address:=192.168.11.1" # to launch rviz
     )
 
     slam_proc = subprocess.Popen(
         ["bash", "--noprofile", "--norc", "-lc", launch_cmd],
-        env=clean_env,
+        env=clean_env, # Uncomment if clean environment needed
         stdout=launch_log,
         stderr=subprocess.STDOUT,
     )

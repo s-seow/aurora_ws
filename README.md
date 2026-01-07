@@ -11,6 +11,10 @@ The functionalities include a) setting a map and b) syncing the map for the conn
 ### Dependencies
 
 **ROS2 Humble**
+
+The script is run on ROS2 Humble (Ubuntu 22.04).
+
+Documentation found here: https://docs.ros.org/en/humble/Installation/Alternatives/Ubuntu-Development-Setup.html 
 ```bash
 rosdep install -i --from-paths src --rosdistro humble -y
 colcon build
@@ -23,7 +27,7 @@ The script requires ``--slamware_ros_sdk`` and ``--aurora_remote_public`` to run
 
 Documentation found here: https://developer.slamtec.com/docs/slamware/aurora-ros2-sdk-en/
 
-Download from this page: https://www.slamtec.com/en/support#aurora (SDK and Firmware -> ROS2 SDK) and move into /src/ folder
+Download from this page: https://www.slamtec.com/en/support#aurora (SDK and Firmware -> ROS2 SDK) and move both folders into /src/ folder
 
 **Other Dependencies (if needed)**
 

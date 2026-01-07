@@ -1,13 +1,16 @@
 # Aurora Script for Buggy Tracking
 
 This repository contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/Spec).
+
 The functionalities include a) setting a map and b) syncing the map for the connected device at IP ``192.168.11.1``.
+
+---
 
 ## Set-up 
 
 ### Dependencies
 
-**ROS2**
+**ROS2 Humble**
 ```bash
 rosdep install -i --from-paths src --rosdistro humble -y
 colcon build
@@ -20,9 +23,9 @@ The script requires ``--slamware_ros_sdk`` and ``--aurora_remote_public`` to run
 
 Documentation found here: https://developer.slamtec.com/docs/slamware/aurora-ros2-sdk-en/
 
-Download from this page: https://www.slamtec.com/en/support#aurora (SDK and Firmware -> ROS2 SDK) and move into /src/
+Download from this page: https://www.slamtec.com/en/support#aurora (SDK and Firmware -> ROS2 SDK) and move into /src/ folder
 
-**Other Dependencies**
+**Other Dependencies (if needed)**
 
 ```bash
 sudo apt install -y libopencv-dev
@@ -36,9 +39,15 @@ sudo apt install -y ros-humble-rviz2
 
     ``colcon build``
 
-2. Run script with map_name selected in /maps/:
+2. Source the overlay
+
+    ``source install/setup.bash``
+
+3. Run script with map_name selected in /maps/:
 
     ``ros2 run py_srvcli map_set_sync_script maps/(map_name).stcm``
+
+---
 
 ## Individual misc. commands 
 

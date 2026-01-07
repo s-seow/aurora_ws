@@ -1,6 +1,7 @@
 # Aurora Script for Buggy Tracking
 
-This repository contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/Spec) that allows for 1. setting a map and 2. syncing the map for the connected device at   IP ``192.168.11.1``.
+This repository contains a script for a SLAMTEC Aurora (https://www.slamtec.com/en/Aurora/Spec).
+The functionalities include a) setting a map and b) syncing the map for the connected device at IP ``192.168.11.1``.
 
 ## Set-up 
 
@@ -21,6 +22,8 @@ Documentation found here: https://developer.slamtec.com/docs/slamware/aurora-ros
 
 Download from this page: https://www.slamtec.com/en/support#aurora (SDK and Firmware -> ROS2 SDK) and move into /src/
 
+**Other Dependencies**
+
 ```bash
 sudo apt install -y libopencv-dev
 sudo apt install -y ros-humble-cv-bridge
@@ -39,22 +42,22 @@ sudo apt install -y ros-humble-rviz2
 
 ## Individual misc. commands 
 
-**Run RVIZ separately**
+- **Run RVIZ separately**
 
-``ros2 launch slamware_ros_sdk slamware_ros_sdk_server_and_view.xml ip_address:=192.168.11.1``
+    ``ros2 launch slamware_ros_sdk slamware_ros_sdk_server_and_view.xml ip_address:=192.168.11.1``
 
-**View system status**
+- **View system status**
 
-``ros2 topic echo /slamware_ros_sdk_server_node/system_status``
+    ``ros2 topic echo /slamware_ros_sdk_server_node/system_status``
 
-**Load map manually**
+- **Load map manually**
 
-``ros2 service call /slamware_ros_sdk_server_node/sync_set_stcm slamware_ros_sdk/srv/SyncSetStcm "{'mapfile': 'maps/(map_name).stcm'}"``
+    ``ros2 service call /slamware_ros_sdk_server_node/sync_set_stcm slamware_ros_sdk/srv/SyncSetStcm "{'mapfile': 'maps/(map_name).stcm'}"``
 
-**Sync map manually**
+- **Sync map manually**
 
-``ros2 topic pub /slamware_ros_sdk_server_node/sync_map slamware_ros_sdk/msg/SyncMapRequest "{}" --once``
+    ``ros2 topic pub /slamware_ros_sdk_server_node/sync_map slamware_ros_sdk/msg/SyncMapRequest "{}" --once``
 
-**Debug**
+- **Debug**
 
-``ros2 run slamware_ros_sdk slamware_ros_sdk_server_node \ --ros-args -p ip_address:=192.168.11.1 --log-level debug``
+    ``ros2 run slamware_ros_sdk slamware_ros_sdk_server_node \ --ros-args -p ip_address:=192.168.11.1 --log-level debug``

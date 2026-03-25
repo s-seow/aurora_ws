@@ -17,6 +17,34 @@ On execution, `map_set_sync_script`:
 
 ---
 
+## Connecting to the Aurora Device
+
+### 1. Power On
+Switch on the Aurora unit and wait for it to fully boot.
+
+### 2. Connect to the Device
+Choose either connection method:
+
+- **LAN (Ethernet):** Connect a cable directly from your machine (or RPi) to the Aurora. Configure your network interface to the same subnet as the device (`192.168.11.x`). The Aurora is accessible at `192.168.11.1` by default.
+- **WiFi:** Connect to the Aurora's WiFi access point. Refer to the [SLAMTEC Aurora documentation](https://developer.slamtec.com) for the default SSID and credentials.
+
+### 3. Verify the Connection
+Ping the device to confirm connectivity:
+```bash
+ping 192.168.11.1
+```
+
+### 4. View the Device (Optional)
+To inspect the Aurora's state and map before running the script, you have two options:
+
+- **Aurora Remote App (`aurora_remote-release1.2.0-rtm`):** SLAMTEC's in-house application for viewing the Aurora directly. Refer to the [SLAMTEC Aurora documentation](https://www.slamtec.com/en/support#aurora) for download and usage instructions.
+- **RViz:** Alternatively, launch RViz via the Slamware ROS2 SDK:
+    ```bash
+    ros2 launch slamware_ros_sdk slamware_ros_sdk_server_and_view.xml ip_address:=192.168.11.1
+    ```
+
+--- 
+
 ## Prerequisites
 
 ### 1. ROS2 Humble (Ubuntu 22.04)

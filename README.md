@@ -1,6 +1,6 @@
 # Aurora Map Set-Sync Script
 
-A ROS2 Python package (`py_srvcli`) for automating map loading and synchronization on a [SLAMTEC Aurora](https://www.slamtec.com/en/Aurora/Spec) device. The script connects to the Aurora unit, uploads a pre-built `.stcm` map file via the Slamware ROS2 SDK service, triggers a map sync, and then subscribes to live system status and robot pose topics.
+A ROS2 Python package (`py_srvcli`) for automating map loading and synchronization on a [SLAMTEC Aurora](https://www.slamtec.com/en/Aurora/Spec) device. The script connects to an Aurora unit, uploads a pre-built `.stcm` map file via the Slamware ROS2 SDK service, triggers a map sync, and then subscribes to live system status and robot pose topics.
 
 Intended to be deployed on a Raspberry Pi as a persistent server, automating map loading and synchronization on an Aurora SLAMTEC device that uses 3D LiDAR to track stray buggies across airport grounds.
 
